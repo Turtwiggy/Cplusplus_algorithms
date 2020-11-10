@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.glsl": "c",
+			"xstring": "cpp",
+			"xutility": "cpp",
+			"ostream": "cpp"
+		}
+	}
+}
