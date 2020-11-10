@@ -1,6 +1,7 @@
 #include <iostream>
+#include <vector>
 
-//TODO: have 10000 items
+// TODO: have 1000000000 items
 // search for an item in a (sorted) vector
 // search for an item in a hash map
 // search for an item in a (sorted) BST
@@ -25,47 +26,50 @@ struct Node
     Node* right_child = nullptr;
 };
 
-// TODO operations
 // Insert() is used to add a new node to the current BST. If it’s the first time we have added a node, the node we inserted will be a root node.
-// PrintTreeInOrder() is used to print all of the keys in the BST, sorted from the smallest key to the greatest key, by a recursive algorithm known as inorder tree walk.
-// Search() is used to find a given key in the BST. If the key exists it returns TRUE, otherwise it returns FALSE.
-// FindMin() and FindMax() are used to find the minimum key and the maximum key that exist in the BST.
-// Successor() and Predecessor() are used to find the successor and predecessor of a given key. We are going to discuss these later in the upcoming section.
+// Search() is used to find a given key in the BST.
+// FindMin() done in O(h)
+// FindMax() done in O(h)
+// Successor() done in O(h)
+// Predecessor() done in O(h) 
 // Remove() is used to remove a given key from BST.
-}
 
-void print_all(BinarySearchTree::Node* node)
+//in-order-tree-walk takes o(n) time
+void print_in_order_tree_walk(BinarySearchTree::Node* node)
 {
-    std::cout << "node value: " << node->key << std::endl;
+    if(node == nullptr)
+        return;
 
     if(node->left_child != nullptr)
-    {
-        std::cout << "going left" <<std::endl;
-        print_all(node->left_child);
-    }
+        print_in_order_tree_walk(node->left_child);
+
+    std::cout << "node value: " << node->key << std::endl;
 
     if(node->right_child != nullptr)
-    {
-        std::cout << "going right" <<std::endl;
-        print_all(node->right_child);
-    }
+        print_in_order_tree_walk(node->right_child);
 }
 
-int main(int, char**) {
+BinarySearchTree* search(BinarySearchTree::Node* node, int key)
+{
+    if(node == nullptr || node->key == key)
+        return node;
+
+    if(key < node->key)
+        return search(node->left_child, key);
+    else
+        return search(node->right_child, key);
+}
 
 
-    //create everything
-    BinarySearchTree::Node node;
-    node.key = 5;
-    BinarySearchTree::Node node_l_0;
-    node_l_0.key = 4;
-    BinarySearchTree::Node node_r_0;
-    node_r_0.key = 10;
 
-    //link everything
-    node.left_child = &node_l_0;
-    node.right_child = &node_r_0;
+}
 
-    print_all(&node);
+
+int main(int, char**) 
+{
+
+
+
+    //print_in_order_tree_walk(&node);
 
 }

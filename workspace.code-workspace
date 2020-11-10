@@ -9,7 +9,8 @@
 			"*.glsl": "c",
 			"xstring": "cpp",
 			"xutility": "cpp",
-			"ostream": "cpp"
+			"ostream": "cpp",
+			"iostream": "cpp"
 		}
 	}
 }
