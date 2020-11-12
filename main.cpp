@@ -26,13 +26,14 @@ struct Node
     Node* right_child = nullptr;
 };
 
-// Insert() is used to add a new node to the current BST. If it’s the first time we have added a node, the node we inserted will be a root node.
-// Search() is used to find a given key in the BST.
-// FindMin() done in O(h)
-// FindMax() done in O(h)
-// Successor() done in O(h)
-// Predecessor() done in O(h) 
-// Remove() is used to remove a given key from BST.
+// insert() is used to add a new node to the current BST. If it’s the first time we have added a node, the node we inserted will be a root node.
+// tree_search() is used to find a given key in the BST.
+// iterative_tree_search()
+// minimum() done in O(h)
+// maximum() done in O(h)
+// successor() done in O(h)
+// predecessor() done in O(h) 
+// remove() is used to remove a given key from BST.
 
 //in-order-tree-walk takes o(n) time
 void print_in_order_tree_walk(BinarySearchTree::Node* node)
@@ -49,15 +50,54 @@ void print_in_order_tree_walk(BinarySearchTree::Node* node)
         print_in_order_tree_walk(node->right_child);
 }
 
-BinarySearchTree* search(BinarySearchTree::Node* node, int key)
+//running time is O(h) where h is height of the tree
+//this function searches the left side of the tree before the right side
+//Note: prefer to use the iterative search function
+BinarySearchTree::Node* tree_search(BinarySearchTree::Node* node, int key)
 {
     if(node == nullptr || node->key == key)
         return node;
 
     if(key < node->key)
-        return search(node->left_child, key);
+        return tree_search(node->left_child, key);
     else
-        return search(node->right_child, key);
+        return tree_search(node->right_child, key);
+}
+
+//A rewrite of tree_search
+//on most computers, the iterative version is more efficient
+BinarySearchTree::Node* iterative_tree_search(BinarySearchTree::Node* node, int key)
+{
+    while(node != nullptr && key != node->key )
+    {   
+        if(key < node->key)
+            node = node->left_child;
+        else
+            node = node->right_child;
+    }
+    return node;
+}
+
+//we can find an element in a binary search tree for the minimum
+//by following the left child pointers from the root until we encounter a nullptr
+BinarySearchTree::Node* minimum(BinarySearchTree::Node* node)
+{
+    while(node->left_child != nullptr)
+    {
+        node = node->left_child;
+    }
+    return node;
+}
+
+//we can find an element in a binary search tree for the maximum
+//by following the right child pointers from the root until we encounter a nullptr
+BinarySearchTree::Node* maximum(BinarySearchTree::Node* node)
+{
+    while(node->right_child != nullptr)
+    {
+        node = node->right_child;
+    }
+    return node;
 }
 
 
@@ -68,6 +108,30 @@ BinarySearchTree* search(BinarySearchTree::Node* node, int key)
 int main(int, char**) 
 {
 
+    //create everything
+    BinarySearchTree::Node node;
+    node.key = 6;
+    BinarySearchTree::Node node_l_0;
+    node_l_0.key = 5;
+
+        BinarySearchTree::Node node_l_1;
+        node_l_1.key = 2;
+
+        BinarySearchTree::Node node_r_1;
+        node_r_1.key = 5;
+
+    BinarySearchTree::Node node_r_0;
+    node_r_0.key = 7;
+
+    //link everything
+    node.left_child = &node_l_0;
+    node.right_child = &node_r_0;
+
+    node_l_0.left_child = &node_l_1;
+    node_l_0.right_child = &node_r_1;
+
+    BinarySearchTree::Node* max = maximum(&node);
+    printf("max key: %i", max->key);
 
 
     //print_in_order_tree_walk(&node);
