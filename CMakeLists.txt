@@ -18,9 +18,9 @@ add_executable(BinarySearchTree
 
 # includes
 target_include_directories(BinarySearchTree PRIVATE 
-  ${CMAKE_SOURCE_DIR}/headers/
+  ${CMAKE_SOURCE_DIR}/src/
 )
 
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)
+# set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+# set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
+# include(CPack)

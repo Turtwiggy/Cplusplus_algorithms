@@ -3,13 +3,7 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/engine/src",
-                "${workspaceFolder}/experimental_raytracing_one_weekend/src",
-                "${workspaceFolder}/experimental_networking/src",
-                "${workspaceFolder}/thirdparty/imgui",
-                "${workspaceFolder}/thirdparty/imgui/examples",
-                "${workspaceFolder}/thirdparty/vcpkg/installed/x64-linux/include",
-                "${workspaceFolder}/headers"
+                "${workspaceFolder}/headers/"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
@@ -20,13 +14,7 @@
             "compilerArgs": [],
             "browse": {
                 "path": [
-                    "${workspaceFolder}/engine/src",
-                    "${workspaceFolder}/ray_tracing_one_weekend/src",
-                    "${workspaceFolder}/thirdparty/imgui",
-                    "${workspaceFolder}/thirdparty/imgui/examples",
-                    "${workspaceFolder}/thirdparty/vcpkg/installed/x64-linux/include",
-                    "${workspaceFolder}/engine/src",
-                    "${workspaceFolder}"
+                    "${workspaceFolder}/**"
                 ],
                 "limitSymbolsToIncludedHeaders": true
             }
