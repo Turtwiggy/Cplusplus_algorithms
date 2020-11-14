@@ -25,6 +25,7 @@ struct BSTNode
 {
 public:
     int key = 0;    
+
     BSTNode* parent = nullptr;
     BSTNode* left_child = nullptr;
     BSTNode* right_child = nullptr;    
@@ -41,12 +42,17 @@ constexpr void print_in_order_tree_walk( BSTNode* node )
         return;
 
     if(node->left_child != nullptr)
+    {
+        printf("left: ");
         print_in_order_tree_walk(node->left_child);
+    }
 
-    std::cout << node->key << " ";
+    std::cout << "node(" << node->key << ") ";
 
-    if(node->right_child != nullptr)
+    if(node->right_child != nullptr){
+        printf("right: ");
         print_in_order_tree_walk(node->right_child);
+    }
 }
 
 // running time is O(h) where h is height of the tree
@@ -99,7 +105,7 @@ constexpr BSTNode* maximum( BSTNode* node )
     return node;
 }
 
-// done in O(h)
+// O(h) time, where height of the tree is h
 // find the successor of a node, determined by in-order-tree-walk
 // if all the keys are distinct, the successor of a node is the 
 // node with the smallest key greater than the node's key
@@ -154,5 +160,42 @@ constexpr BSTNode* predecessor( BSTNode* node )
 
     return y;
 }
+
+// insert node in to the tree
+// O(h) time, where height of the tree is h
+constexpr void insert( BSTNode* root, BSTNode* node )
+{
+    // y is a trailing pointer (y as the parent of x)
+    BSTNode* y = nullptr;
+    BSTNode* x = root;
+
+    // moves the pointers y and x down the tree, 
+    // going left or right depending on the key comparison
+    // until x becomes nullptr
+    // the nullptr is the position to insert the element
+    while(x != nullptr)
+    {
+        y = x;
+        if( node->key < x->key )
+            x = x->left_child;
+        else
+            x = x->right_child;
+    }
+
+    node->parent = y;
+
+    if(y == nullptr)
+        root = node; //root was empty
+    else if( node->key < y->key )
+        y->left_child = node;
+    else
+        y->right_child = node;
+}
+
+// TODO
+// delete has 3 basic cases:
+// 1. if the node has no children, remove it 
+// 2. if the node has one child, elevate that child's position in the tree
+// 3. if the node, z, has two children...
 
 }
