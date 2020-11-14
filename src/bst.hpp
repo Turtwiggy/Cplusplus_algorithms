@@ -30,12 +30,12 @@ public:
     BSTNode* right_child = nullptr;    
 
 public:
-    BSTNode(int key) : key(key) {};
+    BSTNode( int key ) : key(key) {};
 };
 
 // prints the binary search tree to the console
 // in-order-tree-walk takes o(n) time
-constexpr void print_in_order_tree_walk(BSTNode* node)
+constexpr void print_in_order_tree_walk( BSTNode* node )
 {
     if(node == nullptr)
         return;
@@ -51,7 +51,7 @@ constexpr void print_in_order_tree_walk(BSTNode* node)
 
 // running time is O(h) where h is height of the tree
 // on most computers, the iterative version is more efficient
-constexpr BSTNode* iterative_tree_search(BSTNode* node, int key)
+constexpr BSTNode* iterative_tree_search( BSTNode* node, int key )
 {
     while(node != nullptr && key != node->key )
     {   
@@ -65,7 +65,7 @@ constexpr BSTNode* iterative_tree_search(BSTNode* node, int key)
 
 // this function searches the left side of the tree before the right side
 // Note: prefer to use the iterative search function
-constexpr BSTNode* non_iterative_tree_search(BSTNode* node, int key)
+constexpr BSTNode* non_iterative_tree_search( BSTNode* node, int key )
 {
     if(node == nullptr || node->key == key)
         return node;
@@ -79,7 +79,7 @@ constexpr BSTNode* non_iterative_tree_search(BSTNode* node, int key)
 // we can find an element in a binary search tree for the minimum
 // by following the left child pointers from the root until we encounter a nullptr
 // done in O(h)
-constexpr BSTNode* minimum(BSTNode* node)
+constexpr BSTNode* minimum( BSTNode* node )
 {
     while(node->left_child != nullptr)
     {
@@ -90,7 +90,7 @@ constexpr BSTNode* minimum(BSTNode* node)
 
 // we can find an element in a binary search tree for the maximum
 // by following the right child pointers from the root until we encounter a nullptr
-constexpr BSTNode* maximum(BSTNode* node)
+constexpr BSTNode* maximum( BSTNode* node )
 {
     while(node->right_child != nullptr)
     {
@@ -103,7 +103,7 @@ constexpr BSTNode* maximum(BSTNode* node)
 // find the successor of a node, determined by in-order-tree-walk
 // if all the keys are distinct, the successor of a node is the 
 // node with the smallest key greater than the node's key
-constexpr BSTNode* successor(BSTNode* node)
+constexpr BSTNode* successor( BSTNode* node )
 {
 
     //if the right subtree is non-empty, 
@@ -131,10 +131,28 @@ constexpr BSTNode* successor(BSTNode* node)
     return y;
 }
 
-constexpr BSTNode* predecessor(BSTNode* node)
+constexpr BSTNode* predecessor( BSTNode* node )
 {
-    return nullptr;
-}
 
+    //if the left subtree is non-empty,
+    //then the predecessor of a key will be the maximum
+
+    if ( node->left_child != nullptr )
+        return maximum( node->left_child );
+
+    // if the left subtree of the node is empty,
+    // we travere the ancestors until we find the first node
+    // which is lower value than the current node.
+
+    BSTNode* y = node->parent;
+
+    while ( y != nullptr && node == y->left_child )
+    {
+        node = y;
+        y = y->parent;
+    }
+
+    return y;
+}
 
 }

@@ -71,7 +71,10 @@ int main(int, char**)
     BinarySearchTree::print_in_order_tree_walk(&node);
     printf("\n---- end tree ---- \n");
 
-    BinarySearchTree::BSTNode* successor = BinarySearchTree::successor(&right_node_2_1);
-    printf("node: %i successor: %i \n", right_node_2_1.key, successor->key);
+    BinarySearchTree::BSTNode* successor = BinarySearchTree::successor(&node);
+    printf("node: %i successor: %i \n", node.key, successor->key);
+
+    BinarySearchTree::BSTNode* predecessor = BinarySearchTree::predecessor(&left_node_3);
+    printf("node: %i predecessor: %i \n", left_node_3.key, predecessor->key);
 
 }
